@@ -22,7 +22,7 @@ let name = "%NAME%";
   chromium = {
     extensions = [
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
-        ]
+        ];
     };
 
   # Shared shell configuration
