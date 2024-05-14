@@ -5,8 +5,6 @@
   ".emacs.d/init.el" = {
     text = builtins.readFile ../shared/config/emacs/init.el;
   };
-}
-{
   ".config/zellij/zellij.kdl" = {
     text = builtins.readFile ../shared/config/zellij.kdl;
   };

@@ -237,16 +237,8 @@ let name = "%NAME%";
         };
         size = lib.mkMerge [
           (lib.mkIf pkgs.stdenv.hostPlatform.isLinux 10)
-          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 14)
+          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 10)
         ];
-      };
-
-      dynamic_padding = true;
-      decorations = "full";
-      title = "Terminal";
-      class = {
-        instance = "Alacritty";
-        general = "Alacritty";
       };
 
       colors = {
@@ -277,6 +269,20 @@ let name = "%NAME%";
           white = "0xd8dee9";
         };
       };
+    };
+  };
+
+  atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      sync_address = "https://lorentsen";
+      sync_frequency = "15m";
+      filter_mode_shell_up_key_binding = "directory";
+      history_filter = [
+      "^jwt.sh"
+      "^oathtool"
+   ];
     };
   };
 
