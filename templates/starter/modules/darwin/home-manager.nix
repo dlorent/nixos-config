@@ -67,7 +67,6 @@ in
     { path = "/Applications/Slack.app/"; }
     { path = "/Applications/Google Chrome.app/"; }
     { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-    { path = "/System/Applications/Home.app/"; }
     {
       path = toString myEmacsLauncher;
       section = "others";
