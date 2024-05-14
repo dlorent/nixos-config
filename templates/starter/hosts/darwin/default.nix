@@ -13,6 +13,9 @@ let user = "%USER%"; in
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
+  # Unlocking sudo via fingerprint 
+  security.pam.enableSudoTouchIdAuth = true;
+
   # Setup user, packages, programs
   nix = {
     package = pkgs.nix;
