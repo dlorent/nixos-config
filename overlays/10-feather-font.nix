@@ -6,7 +6,7 @@ self: super: with super; {
     name = "${pname}-${version}";
 
     src = fetchzip {
-      url = "https://github.com/dlorent/feather-font/archive/refs/tags/${version}.zip";
+      url = "https://github.com/dustinlyons/feather-font/archive/refs/tags/${version}.zip";
       sha256 = "sha256-Zsz8/qn7XAG6BVp4XdqooEqioFRV7bLH0bQkHZvFbsg=";
     };
 
