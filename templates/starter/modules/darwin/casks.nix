@@ -19,7 +19,7 @@ _:
   "raycast"
 
   # Browsers
-  "google-chrome"
+  "eloston-chromium"
 
   "rectangle"
   "gimp"

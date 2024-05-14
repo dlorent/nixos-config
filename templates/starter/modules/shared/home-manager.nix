@@ -18,6 +18,13 @@ let name = "%NAME%";
 
   ];
 };
+  #chromium
+  chromium = {
+    extensions = [
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+        ]
+    };
+
   # Shared shell configuration
   zsh = {
     enable = true;
