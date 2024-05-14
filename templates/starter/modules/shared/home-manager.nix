@@ -4,10 +4,33 @@ let name = "%NAME%";
     user = "%USER%";
     email = "%EMAIL%"; in
 {
+  #vscodeIum
+  vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    extensions = with pkgs.vscode-extensions; [
+      dracula-theme.theme-dracula
+      vscodevim.vim
+      yzhang.markdown-all-in-one
+      eamodio.gitlens
+      editorconfig.editorconfig
+      jnoortheen.nix-ide
+
+  ];
+};
   # Shared shell configuration
   zsh = {
     enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
     autocd = false;
+    shellAliases = {
+      ls = "lsd";
+      ll = "ls -lt";
+      update = "sudo nixos-rebuild switch";
+      z = "zellij --layout ~/.config/zellij/zellij.kdl";
+    };
     plugins = [
       {
         name = "powerlevel10k";
@@ -20,6 +43,12 @@ let name = "%NAME%";
         file = "p10k.zsh";
       }
     ];
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "zsh-users/zsh-autosuggestions"; }
+      ];
+     };
 
     initExtraFirst = ''
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then

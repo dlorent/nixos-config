@@ -15,6 +15,8 @@ with pkgs; [
   sqlite
   wget
   zip
+  zellij
+  atuin
 
   # Encryption and security tools
   age
@@ -25,8 +27,11 @@ with pkgs; [
   # Cloud-related tools and SDKs
   docker
   docker-compose
+  k9s
+  (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
 
   # Media-related packages
+  spotify
   emacs-all-the-icons-fonts
   dejavu_fonts
   ffmpeg
@@ -36,11 +41,6 @@ with pkgs; [
   noto-fonts
   noto-fonts-emoji
   meslo-lgs-nf
-
-  # Node.js development tools
-  nodePackages.npm # globally install npm
-  nodePackages.prettier
-  nodejs
 
   # Text and terminal utilities
   htop
@@ -54,8 +54,5 @@ with pkgs; [
   unrar
   unzip
   zsh-powerlevel10k
-
-  # Python packages
-  python39
-  python39Packages.virtualenv # globally install virtualenv
+  lsd
 ]

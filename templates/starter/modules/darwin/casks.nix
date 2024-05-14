@@ -7,9 +7,7 @@ _:
 
   # Communication Tools
   "discord"
-  "notion"
   "slack"
-  "telegram"
   "zoom"
 
   # Utility Tools
@@ -23,4 +21,11 @@ _:
 
   # Browsers
   "google-chrome"
+
+  "rectangle"
+  "gimp"
+  "tailscale"
+  "microsoft-auto-update"
+  "microsoft-teams"
+  "veracrypt"
 ]

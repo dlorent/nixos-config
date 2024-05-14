@@ -1,0 +1,63 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    tab_template name="kubectl" {
+        pane split_direction="horizontal" {
+            children
+            pane command="zsh" size="30%" {
+                args "-ic" "kubectl get pods -A |egrep -v 'Running|Completed'"
+            }
+           pane command="zsh" size="70%" {
+                args "-ic" "echo 'lets party!'"
+            }
+        }
+    }
+
+  tab name="Cloud" {
+    pane split_direction="horizontal" stacked=true {
+
+    pane name="Application-PROD" cwd="/Users/dennis/kube/cloud/application-cluster-prod"
+    pane name="Application-prod-test" cwd="/Users/dennis/kube/cloud/application-cluster-prod-test"
+    pane name="Application-test" cwd="/Users/dennis/kube/cloud/application-cluster-test"
+    pane name="Infrastructure-mgmt" cwd="/Users/dennis/kube/cloud/infrastructure-management"
+    pane name="Infrastructure-mgmt-test" cwd="/Users/dennis/kube/cloud/infrastructure-mgmt-test"
+    pane name="Application-test" cwd="/Users/dennis/kube/cloud/application-cluster-test"
+    }
+  }
+
+  tab name="k8s-onprem" {
+    pane split_direction="horizontal" stacked=true {
+
+    pane name="Kube00-prod" cwd="/Users/dennis/kube/old-onprem/kube00-prd"
+    pane name="Kube00-test" cwd="/Users/dennis/kube/old-onprem/kube00-tst"
+    pane name="Kube01-prod" cwd="/Users/dennis/kube/old-onprem/kube01-prd"
+    pane name="Kube01-test" cwd="/Users/dennis/kube/old-onprem/kube01-tst"
+    pane name="Kube02-prod" cwd="/Users/dennis/kube/old-onprem/kube02-prd"
+    pane name="Kube02-test" cwd="/Users/dennis/kube/old-onprem/kube02-tst"
+    }
+  }
+
+  tab name="k8s-p1" {
+    pane split_direction="horizontal" stacked=true {
+
+    pane name="Pool-1-prod" cwd="/Users/dennis/kube/new-onprem/pool-1-prod"
+    pane name="Pool-1-prod-test" cwd="/Users/dennis/kube/new-onprem/pool-1-prod-test"
+    pane name="Pool-1-test" cwd="/Users/dennis/kube/new-onprem/pool-1-test"
+    }
+  }
+
+  tab name="workspace" {
+    pane split_direction="horizontal" stacked=true {
+
+    pane name="git" cwd="/Users/dennis/git"
+    }
+  }
+
+}

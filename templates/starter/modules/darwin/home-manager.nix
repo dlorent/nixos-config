@@ -35,8 +35,6 @@ in
     # $ mas search <app name>
     #
     masApps = {
-      "1password" = 1333542190;
-      "wireguard" = 1451685025;
     };
   };
 
@@ -66,14 +64,8 @@ in
   local.dock.enable = true;
   local.dock.entries = [
     { path = "/Applications/Slack.app/"; }
-    { path = "/System/Applications/Messages.app/"; }
-    { path = "/System/Applications/Facetime.app/"; }
+    { path = "/Applications/Google Chrome.app/"; }
     { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-    { path = "/System/Applications/Music.app/"; }
-    { path = "/System/Applications/News.app/"; }
-    { path = "/System/Applications/Photos.app/"; }
-    { path = "/System/Applications/Photo Booth.app/"; }
-    { path = "/System/Applications/TV.app/"; }
     { path = "/System/Applications/Home.app/"; }
     {
       path = toString myEmacsLauncher;
