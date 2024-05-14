@@ -27,7 +27,7 @@ jobs:
       - name: Initalize flake
         run: |
           mkdir -p my-config && cd my-config
-          nix flake --extra-experimental-features 'nix-command flakes' init -t github:dustinlyons/nixos-config#starter
+          nix flake --extra-experimental-features 'nix-command flakes' init -t github:dlorent/nixos-config#starter
 
       - name: Apply CI User Info
         run: |

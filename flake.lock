@@ -345,11 +345,11 @@
         "rev": "f22586b10f0b04793073c661574f884f4031076c",
         "revCount": 16,
         "type": "git",
-        "url": "ssh://git@github.com/dustinlyons/nix-secrets.git"
+        "url": "ssh://git@github.com/dlorent/nix-secrets.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/dustinlyons/nix-secrets.git"
+        "url": "ssh://git@github.com/dlorent/nix-secrets.git"
       }
     },
     "systems": {

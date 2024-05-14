@@ -5,9 +5,9 @@
 ** About my Emacs
 This is my detailed Emacs configuration. It's an ~org~ file that is transpiled to ~emacs-lisp~ as part of the Nix build process. 
 
-Why an ~org~ file? My Emacs config is large, and this enables me to improve the readability of its documentation greatly. I edit this file the same way you're reading it (nicely formatted) as I use Emacs and Emacs speaks ~org~. Sounds complicated, but it's really not; [[https://github.com/dustinlyons/nixos-config/blob/main/hosts/nixos/default.nix#L236][just a few lines]] in my Nix config. [[https://github.com/dustinlyons/nixos-config/blob/main/hosts/darwin/default.nix#L40][MacOS too.]]
+Why an ~org~ file? My Emacs config is large, and this enables me to improve the readability of its documentation greatly. I edit this file the same way you're reading it (nicely formatted) as I use Emacs and Emacs speaks ~org~. Sounds complicated, but it's really not; [[https://github.com/dlorent/nixos-config/blob/main/hosts/nixos/default.nix#L236][just a few lines]] in my Nix config. [[https://github.com/dlorent/nixos-config/blob/main/hosts/darwin/default.nix#L40][MacOS too.]]
 
-This is the main configuration, but one more init file also exists, ~init.el~ , that bootstraps ~org-mode~ before this file is interpreted. That's defined [[https://github.com/dustinlyons/nixos-config/blob/main/modules/shared/files.nix#L56][here]].
+This is the main configuration, but one more init file also exists, ~init.el~ , that bootstraps ~org-mode~ before this file is interpreted. That's defined [[https://github.com/dlorent/nixos-config/blob/main/modules/shared/files.nix#L56][here]].
 
 /Each block of code below is the actual Emacs configuration./ Formally, this style of configuration is called [[https://en.wikipedia.org/wiki/Literate_programming]["literate programming"]].
 
@@ -16,8 +16,8 @@ Just me!
 
 #+NAME: personal-info
 #+BEGIN_SRC emacs-lisp
-  (setq user-full-name "Dustin Lyons"
-    user-mail-address "dustin@dlyons.dev")
+  (setq user-full-name "dlorent "
+    user-mail-address "dlorent@lorentsen.dev")
 #+END_SRC
 
 ** Initialization
@@ -84,8 +84,8 @@ This associates our package manager with the right source (MELPA).
 
   ;; Set path for darwin
   (when (system-is-mac)
-    (setenv "PATH" (concat (getenv "PATH") ":/Users/dustin/.nix-profile/bin:/usr/bin"))
-    (setq exec-path (append '("/Users/dustin/bin" "/profile/bin" "/Users/dustin/.npm-packages/bin" "/Users/dustin/.nix-profile/bin" "/nix/var/nix/profiles/default/bin" "/usr/local/bin" "/usr/bin") exec-path)))
+    (setenv "PATH" (concat (getenv "PATH") ":/Users/dlorent/.nix-profile/bin:/usr/bin"))
+    (setq exec-path (append '("/Users/dlorent/bin" "/profile/bin" "/Users/dlorent/.npm-packages/bin" "/Users/dlorent/.nix-profile/bin" "/nix/var/nix/profiles/default/bin" "/usr/local/bin" "/usr/bin") exec-path)))
 #+END_SRC
 
 *** Counsel/Ivy framework
@@ -731,7 +731,7 @@ These are templates used to create new notes.
 #+BEGIN_SRC emacs-lisp
   (require 'ucs-normalize)
   (use-package org-roam
-    :straight (:host github :repo "dustinlyons/org-roam"
+    :straight (:host github :repo "dlorent/org-roam"
                :branch "master"
                :files (:defaults "extensions/*")
     :build (:not compile))

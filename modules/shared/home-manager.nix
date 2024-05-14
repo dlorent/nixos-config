@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
-let name = "Dustin Lyons";
-    user = "dustin";
-    email = "dustin@dlyons.dev"; in
+let name = "dlorent ";
+    user = "dlorent";
+    email = "dlorent@lorentsen.nu"; in
 {
 
   direnv = {
@@ -309,7 +309,7 @@ let name = "Dustin Lyons";
         # Use XDG data directory
         # https://github.com/tmux-plugins/tmux-resurrect/issues/348
         extraConfig = ''
-          set -g @resurrect-dir '/Users/dustin/.cache/tmux/resurrect'
+          set -g @resurrect-dir '/Users/dlorent/.cache/tmux/resurrect'
           set -g @resurrect-capture-pane-contents 'on'
           set -g @resurrect-pane-contents-area 'visible'
         '';

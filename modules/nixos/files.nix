@@ -102,7 +102,7 @@ let
       # Desktop 1
       # Email, Calendar, News, IDE
       bspc rule -a Google-chrome -o desktop='^1'
-      /etc/profiles/per-user/dustin/bin/google-chrome-stable "https://www.fastmail.com" "https://calendar.google.com/calendar/u/0/r" "https://www.techmeme.com"  &!
+      /etc/profiles/per-user/dlorent/bin/google-chrome-stable "https://www.fastmail.com" "https://calendar.google.com/calendar/u/0/r" "https://www.techmeme.com"  &!
 
       sleep 1
       bspc rule -a PHPStorm -o desktop='^1'
@@ -117,7 +117,7 @@ let
       # Desktop 2
       # Terminal, Emacs (magit)
       bspc rule -a Alacritty -o desktop='^2'
-      /etc/profiles/per-user/dustin/bin/alacritty -e sh -c 'tmux attach || tmux new-session' &
+      /etc/profiles/per-user/dlorent/bin/alacritty -e sh -c 'tmux attach || tmux new-session' &
 
       sleep 1
       bspc rule -a Emacs -o desktop='^2'
@@ -128,14 +128,14 @@ let
       # Desktop 3
       # ChatGPT
       bspc rule -a Google-chrome -o desktop='^3'
-      /etc/profiles/per-user/dustin/bin/google-chrome-stable --new-window "https://chat.openai.com" &!
+      /etc/profiles/per-user/dlorent/bin/google-chrome-stable --new-window "https://chat.openai.com" &!
 
       sleep .5
 
       # Desktop 4
       # Apple Music
       bspc rule -a Cider -o desktop='^4'
-      /etc/profiles/per-user/dustin/bin/cider &!
+      /etc/profiles/per-user/dlorent/bin/cider &!
 
       sleep 1
     '';

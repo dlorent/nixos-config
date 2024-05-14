@@ -14,6 +14,6 @@ jobs:
       - uses: "DeterminateSystems/nix-installer-action@main"
       - uses: "DeterminateSystems/flakehub-push@main"
         with:
-          name: "dustinlyons/nixos-config"
+          name: "dlorent/nixos-config"
           rolling: true
           visibility: "public"
