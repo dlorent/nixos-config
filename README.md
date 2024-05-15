@@ -67,6 +67,12 @@ nix run .#build-switch
 - **Backed by Continuous Integration**: Flake auto updates weekly if changes don't break starter build
 
 
+# Noteworthy additions
+- **Homebrew**  
+  Added support for formulas
+- **Sudo fingerprints**  
+ (security.pam.enableSudoTouchIdAuth = true;)
+
 # Tools Overview
 
 ## Containers and Virtualization
