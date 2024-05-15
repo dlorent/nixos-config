@@ -18,7 +18,7 @@ let name = "%NAME%";
 
   ];
 };
-  #chromium
+  #chromium - extensions not working
   chromium = {
     extensions = [
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin

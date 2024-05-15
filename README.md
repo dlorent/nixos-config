@@ -3,70 +3,50 @@
 [![Statix Lint](https://github.com/dlorent/nixos-config/actions/workflows/lint.yml/badge.svg)](https://github.com/dlorent/nixos-config/actions/workflows/lint.yml)
 
 ## Overview
-Hey, you made it! Welcome. 🤓
 
-Nix is a powerful package manager for Linux and Unix systems that ensures reproducible, declarative, and reliable software management. 
+Forked from [dustinlyons](https://github.com/dustinlyons/nixos-config) - all credit towards him! :)
 
-This repository contains configuration for a general-purpose development environment that runs Nix on macOS, NixOS, or both simultaneously.
+Modified for my personal needs. lot's of documentation stripped away. Detailed documentation can be found at dustin's repo (https://github.com/dustinlyons/nixos-config)
 
-I use it daily on my 🧑🏻‍💻 Macbook Pro and an x86 PC in my home office. It also runs as a VM on your Mac. Many others have reported that it's working for them too.
+## For macOS (May 2024)
+This configuration supports both Intel and Apple Silicon Macs.
 
-Check out the step-by-step commands below to get started!
-
-## Table of Contents
-- [Nix Config for macOS + NixOS](#nix-config-for-macos--nixos)
-  - [Overview](#overview)
-  - [Table of Contents](#table-of-contents)
-  - [Layout](#layout)
-  - [Features](#features)
-  - [Disclaimer](#disclaimer)
-  - [Videos](#videos)
-    - [macOS](#macos)
-      - [Updating dependencies with one command](#updating-dependencies-with-one-command)
-      - [Instant Emacs 29 thanks to daemon mode](#instant-emacs-29-thanks-to-daemon-mode)
-    - [NixOS](#nixos)
-  - [Installing](#installing)
-    - [For macOS (May 2024)](#for-macos-may-2024)
-      - [1. Install dependencies](#1-install-dependencies)
-      - [2. Install Nix](#2-install-nix)
-      - [3. Initialize a starter template](#3-initialize-a-starter-template)
-      - [4. Make apps executable](#4-make-apps-executable)
-      - [5. Apply your current user info](#5-apply-your-current-user-info)
-      - [6. Decide what packages to install](#6-decide-what-packages-to-install)
-      - [7. Review your shell configuration](#7-review-your-shell-configuration)
-      - [8. Optional: Setup secrets](#8-optional-setup-secrets)
-      - [9. Install configuration](#9-install-configuration)
-      - [10. Make changes](#10-make-changes)
-    - [For NixOS](#for-nixos)
-      - [1. Burn and use the latest ISO](#1-burn-and-use-the-latest-iso)
-      - [2. Optional: Setup secrets](#2-optional-setup-secrets)
-      - [3. Install configuration](#3-install-configuration)
-      - [4. Set user password](#4-set-user-password)
-  - [How to Create Secrets](#how-to-create-secrets)
-  - [Making Changes](#making-changes)
-      - [Development workflow](#development-workflow)
-      - [Trying packages](#trying-packages)
-  - [Compatibility and Feedback](#compatibility-and-feedback)
-    - [Platforms](#platforms)
-    - [Contributing](#contributing)
-    - [Feedback and Questions](#feedback-and-questions)
-    - [License](#license)
-  - [Appendix](#appendix)
-    - [Why Nix Flakes](#why-nix-flakes)
-    - [NixOS Components](#nixos-components)
-    - [Support](#support)
-    - [Stars](#stars)
-
-
-
-## Layout
+### 1. Install dependencies
+```sh
+xcode-select --install
 ```
-.
-├── apps         # Nix commands used to bootstrap and build configuration
-├── hosts        # Host-specific configuration
-├── modules      # macOS and nix-darwin, NixOS, and shared configuration
-├── overlays     # Drop an overlay file in this dir, and it runs. So far, mainly patches.
-├── templates    # Starter versions of this configuration
+### 2. Install Nix
+Thank you for the [installer](https://zero-to-nix.com/concepts/nix-installer), [Determinate Systems](https://determinate.systems/)!
+```sh
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
+
+```sh
+mkdir -p nixos-config && cd nixos-config && nix flake --extra-experimental-features 'nix-command flakes' init -t github:dlorent/nixos-config#starter
+```
+
+### 4. Make [apps](https://github.com/dustinlyons/nixos-config/tree/main/apps) executable
+```sh
+find apps/$(uname -m | sed 's/arm64/aarch64/')-darwin -type f \( -name apply -o -name build -o -name build-switch -o -name create-keys -o -name copy-keys -o -name check-keys \) -exec chmod +x {} \;
+```
+
+### 5. Apply your current user info
+Run this Nix command to replace stub values with your system properties, username, full name, and email.
+> Email is only used in the `git` configuration.
+```sh
+nix run .#apply
+```
+
+### 9. Install configuration
+Ensure the build works before deploying the configuration, run:
+```sh
+nix run .#build
+```
+
+### 10. Make changes
+Finally, alter your system with this command:
+```sh
+nix run .#build-switch
 ```
 
 ## Features
@@ -86,425 +66,143 @@ Check out the step-by-step commands below to get started!
 - **Simplicity and Readability**: Optimized for simplicity and readability in all cases, not small files everywhere
 - **Backed by Continuous Integration**: Flake auto updates weekly if changes don't break starter build
 
-## Disclaimer
-Installing Nix on macOS will create an entirely separate volume. It will exceed many gigabytes in size. 
 
-Some folks don't like this. If this is you, turn back now!
-
-> [!NOTE]
-> Don't worry, you can always [uninstall](https://github.com/DeterminateSystems/nix-installer#uninstalling) Nix later.
-
-## Videos
-### macOS
-#### Updating dependencies with one command
-https://github.com/dlorent/nixos-config/assets/1292576/2168d482-6eea-4b51-adc1-2ef1291b6598
-
-#### Instant Emacs 29 thanks to daemon mode
-- **GUI**
-
-https://github.com/dlorent/nixos-config/assets/1292576/66001066-2bbf-4492-bc9e-60ea1abeb987
-
-- **Terminal**
-
-https://github.com/dlorent/nixos-config/assets/1292576/d96f59ce-f540-4f14-bc61-6126a74f9f52
-
-### NixOS
-
-https://github.com/dlorent/nixos-config/assets/1292576/fa54a87f-5971-41ee-98ce-09be048018b8
-
-## Installing
-> [!IMPORTANT]
-> Note: Nix 2.18 currently [has a bug](https://github.com/NixOS/nix/issues/9052) that impacts this repository.
-> 
-> For now, if you run into errors like this:
-> ```
-> error: path '/nix/store/52k8rqihijagzc2lkv17f4lw9kmh4ki6-gnugrep-3.11-info' is not valid
-> ```
-> 
-> Run `nix copy` to make the path valid.
-> ```
-> nix copy --from https://cache.nixos.org /nix/store/52k8rqihijagzc2lkv17f4lw9kmh4ki6-gnugrep-3.11-info
-> ```
-
-## For macOS (May 2024)
-This configuration supports both Intel and Apple Silicon Macs.
-
-### 1. Install dependencies
-```sh
-xcode-select --install
-```
-
-### 2. Install Nix
-Thank you for the [installer](https://zero-to-nix.com/concepts/nix-installer), [Determinate Systems](https://determinate.systems/)!
-```sh
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-```
-> [!IMPORTANT]
->
-> If using [the official installation instructions](https://nixos.org/download) instead, [`flakes`](https://nixos.wiki/wiki/Flakes) and [`nix-command`](https://nixos.wiki/wiki/Nix_command) aren't available by default.
->
-> You'll need to enable them.
-> 
-> **Add this line to your `/etc/nix/nix.conf` file**
-> ```
-> experimental-features = nix-command flakes
-> ```
-> 
-> **_OR_**
->
-> **Specify experimental features when using `nix run` below**
-> ```
-> nix --extra-experimental-features 'nix-command flakes' run .#<command>
-> ```
-
-### 3. Initialize a starter template
-*Choose one of two options*
-
-**Simplified version without secrets management**
-* Great for beginners, enables you to get started quickly and test out Nix.
-* Forgoing secrets just means you must configure apps that depend on keys, passwords, etc., yourself.
-* You can always add secrets later.
-
-```sh
-mkdir -p nixos-config && cd nixos-config && nix flake --extra-experimental-features 'nix-command flakes' init -t github:dlorent/nixos-config#starter
-```
-**Full version with secrets management**
-* Choose this to add more moving parts for a 100% declarative configuration.
-* This template offers you a place to keep passwords, private keys, etc. *as part of your configuration*.
-
-```sh
-mkdir -p nixos-config && cd nixos-config && nix flake --extra-experimental-features 'nix-command flakes' init -t github:dlorent/nixos-config#starter-with-secrets
-```
-
-### 4. Make [apps](https://github.com/dlorent/nixos-config/tree/main/apps) executable
-```sh
-find apps/$(uname -m | sed 's/arm64/aarch64/')-darwin -type f \( -name apply -o -name build -o -name build-switch -o -name create-keys -o -name copy-keys -o -name check-keys \) -exec chmod +x {} \;
-```
-
-### 5. Apply your current user info
-Run this Nix command to replace stub values with your system properties, username, full name, and email.
-> Email is only used in the `git` configuration.
-```sh
-nix run .#apply
-```
-> [!NOTE]
-> If you're using a git repository, only files in the working tree will be copied to the [Nix Store](https://zero-to-nix.com/concepts/nix-store).
->
-> You must run `git add .` first.
-
-### 6. Decide what packages to install
-You can search for packages on the [official NixOS website](https://search.nixos.org/packages).
-
-**Review these files**
-
-* [`modules/darwin/casks.nix`](https://github.com/dlorent/nixos-config/blob/main/modules/darwin/casks.nix)
-* [`modules/darwin/packages.nix`](https://github.com/dlorent/nixos-config/blob/main/modules/darwin/packages.nix)
-* [`modules/shared/packages/nix`](https://github.com/dlorent/nixos-config/blob/main/modules/shared/packages.nix)
-
-### 7. Review your shell configuration
-Add anything from your existing `~/.zshrc`, or just review the new configuration.
-
-**Review these files**
-
-* [`modules/darwin/home-manager`](https://github.com/dlorent/nixos-config/blob/main/modules/darwin/home-manager.nix)
-* [`modules/shared/home-manager`](https://github.com/dlorent/nixos-config/blob/main/modules/shared/home-manager.nix)
-
-### 8. Optional: Setup secrets
-If you are using the starter with secrets, there are a few additional steps.
-
-#### 8a. Create a private Github repo to hold your secrets
-In Github, create a private [`nix-secrets`](https://github.com/dlorent/nix-secrets-example) repository with at least one file (like a `README`). You'll enter this name during installation.
-
-#### 8b. Install keys
-Before generating your first build, these keys must exist in your `~/.ssh` directory. Don't worry, I provide a few commands to help you.
-
-| Key Name            | Platform         | Description                           | 
-|---------------------|------------------|---------------------------------------|
-| id_ed25519          | macOS / NixOS    | Used to download secrets from Github. |
-| id_ed25519_agenix   | macOS / NixOS    | Used to encrypt and decrypt secrets.  |
-
-Run one of these commands:
-
-##### Copy keys from USB drive
-This command auto-detects a USB drive connected to the current system.
-> Keys must be named `id_ed25519` and `id_ed25519_agenix`.
-```sh
-nix run .#copy-keys
-```
-
-##### Create new keys
-```sh
-nix run .#create-keys
-```
-> [!NOTE]
-> If you choose this option, make sure to [save the value](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) of `id_ed25519.pub` to Github.
-> 
-> ```sh
-> cat /Users/$USER/.ssh/id_ed25519.pub | pbcopy # Copy key to clipboard
-> ```
-
-##### Check existing keys
-If you're rolling your own, just check they are installed correctly.
-```sh
-nix run .#check-keys
-```
-
-### 9. Install configuration
-Ensure the build works before deploying the configuration, run:
-```sh
-nix run .#build
-```
-> [!NOTE]
-> If you're using a git repository, only files in the working tree will be copied to the [Nix Store](https://zero-to-nix.com/concepts/nix-store).
->
-> You must run `git add .` first.
-
-> [!WARNING]
-> You may encounter `error: Unexpected files in /etc, aborting activation` if `nix-darwin` detects it will overwrite
-> an existing `/etc/` file. The error will list the files like this:
-> 
-> ```
-> The following files have unrecognized content and would be overwritten:
-> 
->   /etc/nix/nix.conf
->   /etc/bashrc
-> 
-> Please check there is nothing critical in these files, rename them by adding .before-nix-darwin to the end, and then try again.
-> ```
-> Backup and move the files out of the way and/or edit your Nix configuration before continuing.
-
-### 10. Make changes
-Finally, alter your system with this command:
-```sh
-nix run .#build-switch
-```
-> [!CAUTION]
-> `~/.zshrc` will be replaced with the [`zsh` configuration](https://github.com/dlorent/nixos-config/blob/main/templates/starter/modules/shared/home-manager.nix#L8) from this repository. Make sure this is what you want.
-
-## For NixOS
-This configuration supports both `x86_64` and `aarch64` platforms.
-
-### 1. Burn and use the latest ISO
-Download and burn [the minimal ISO image](https://nixos.org/download.html) to a USB, or create a new VM with the ISO as base. Boot the installer.
-> If you're building a VM on an Apple Silicon Mac, choose [64-bit ARM](https://channels.nixos.org/nixos-23.05/latest-nixos-minimal-aarch64-linux.iso).
-
-**Quick Links**
-
-* [64-bit Intel/AMD](https://channels.nixos.org/nixos-23.05/latest-nixos-minimal-x86_64-linux.iso)
-* [64-bit ARM](https://channels.nixos.org/nixos-23.05/latest-nixos-minimal-aarch64-linux.iso)
-
-### 2. Optional: Setup secrets
-If you are using the starter with secrets, there are a few additional steps.
-
-#### 2a. Create a private Github repo to hold your secrets
-In Github, create a private [`nix-secrets`](https://github.com/dlorent/nix-secrets-example) repository with at least one file (like a `README`). You'll enter this name during installation.
-
-#### 2b. Install keys
-Before generating your first build, these keys must exist in your `~/.ssh` directory. Don't worry, I provide a few commands to help you.
-
-| Key Name            | Platform         | Description                           | 
-|---------------------|------------------|---------------------------------------|
-| id_ed25519          | macOS / NixOS    | Used to download secrets from Github. |
-| id_ed25519_agenix   | macOS / NixOS    | Used to encrypt and decrypt secrets.  |
-
-Run one of these commands:
-
-##### Copy keys from USB drive
-This command auto-detects a USB drive connected to the current system.
-> Keys must be named `id_ed25519` and `id_ed25519_agenix`.
-```sh
-sudo nix run --extra-experimental-features 'nix-command flakes' github:dlorent/nixos-config#copy-keys
-```
-
-##### Create new keys
-```sh
-sudo nix run --extra-experimental-features 'nix-command flakes' github:dlorent/nixos-config#create-keys
-```
-
-##### Check existing keys
-If you're rolling your own, just check they are installed correctly.
-```sh
-sudo nix run --extra-experimental-features 'nix-command flakes' github:dlorent/nixos-config#check-keys
-```
-
-### 3. Install configuration
-#### Pick your template
-
-> [!IMPORTANT]
-> For Nvidia cards, select the second option, `nomodeset`, when booting the installer, or you will see a blank screen.
-
-> [!CAUTION]
-> Running this will reformat your drive to the `ext4` filesystem.
-
-**Simple**
-* Great for beginners, enables you to get started quickly and test out Nix.
-* Forgoing secrets means you must configure apps that depend on keys or passwords yourself.
-* You can always add secrets later.
-```sh
-sudo nix run --extra-experimental-features 'nix-command flakes' github:dlorent/nixos-config#install
-```
-
-**With secrets**
-* Choose this to add more moving parts for a 100% declarative configuration.
-* This template offers you a place to keep passwords, private keys, etc. *as part of your configuration*.
-```sh
-sudo nix run --extra-experimental-features 'nix-command flakes' github:dlorent/nixos-config#install-with-secrets
-```
-
-### 4. Set user password
-On first boot at the login screen:
-- Use shortcut `Ctrl-Alt-F2` (or `Fn-Ctrl-Option-F2` if on a Mac) to move to a terminal session
-- Login as `root` using the password created during installation
-- Set the user password with `passwd <user>`
-- Go back to the login screen: `Ctrl-Alt-F7`
-
-## How to create secrets
-To create a new secret `secret.age`, first [create a `secrets.nix` file](https://github.com/ryantm/agenix#tutorial) at the root of your [`nix-secrets`](https://github.com/dlorent/nix-secrets-example) repository. Use this code:
-
-> [!NOTE]
-> `secrets.nix` is interpreted by the imperative `agenix` commands to pick the "right" keys for your secrets.
->
-> Think of this file as the config file for `agenix`. It's not part of your system configuration.
-
-**secrets.nix**
-```nix
-let
-  user1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0idNvgGiucWgup/mP78zyC23uFjYq0evcWdjGQUaBH";
-  users = [ user1 ];
-
-  system1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJDyIr/FSz1cJdcoW69R+NrWzwGK/+3gJpqD1t8L2zE";
-  systems = [ system1 ];
-in
-{
-  "secret.age".publicKeys = [ user1 system1 ];
-}
-```
-Values for `user1` should be your public key, or if you prefer to have keys attached to hosts, use the `system1` declaration. 
-
-Now that we've configured `agenix` with our `secrets.nix`, it's time to create our first secret. 
-
-Run the command below. 
-
-```
-EDITOR=vim nix run github:ryantm/agenix -- -e secret.age
-```
-
-This opens an editor to accept, encrypt, and write your secret to disk. 
-
-The command will look up the public key for `secret.age`, defined in your `secrets.nix`, and check for its private key in `~/.ssh/.`
-
-> To override the SSH path, provide the `-i` flag with a path to your `id_ed25519` key.
-
-Write your secret in the editor, save, and commit the file to your [`nix-secrets`](https://github.com/dlorent/nix-secrets-example) repo. 
-
-Now we have two files: `secrets.nix` and our `secret.age`. 
-
-Here's a more step-by-step example:
-
-## Secrets Example
-Let's say I wanted to create a new secret to hold my Github SSH key. 
-
-I would `cd` into my [`nix-secrets`](https://github.com/dlorent/nix-secrets-example) repo directory, verify the `agenix` configuration (named `secrets.nix`) exists, then run 
-```
-EDITOR=vim nix run github:ryantm/agenix -- -e github-ssh-key.age
-```
-
-This would start a `vim` session.
-
-I would enter insert mode `:i`, copy+paste the key, hit Esc and then type `:w` to save it, resulting in the creation of a new file, `github-ssh-key.age`.
-
-Then, I would edit `secrets.nix` to include a line specifying the public key to use for my new secret. I specify a user key, but I could just as easily specify a host key.
-
-**secrets.nix**
-```nix
-let
-  dlorent = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0idNvgGiucWgup/mP78zyC23uFjYq0evcWdjGQUaBH";
-  users = [ dlorent ];
-  systems = [ ];
-in
-{
-  "github-ssh-key.age".publicKeys = [ dlorent ];
-}
-```
-
-Finally, I'd commit all changes to the [`nix-secrets`](https://github.com/dlorent/nix-secrets-example) repository, go back to my `nixos-config` and run `nix flake update` to update the lock file.
-
-The secret is now ready to use. Here's an [example](https://github.com/dlorent/nixos-config/blob/3b95252bc6facd7f61c6c68ceb1935481cb6b457/nixos/secrets.nix#L28) from my configuration. In the end, this creates a symlink to a decrypted file in the Nix Store that reflects my original file.
-
-## Making changes
-With Nix, changes to your system are made by 
-- editing your system configuration
-- building the [system closure](https://zero-to-nix.com/concepts/closures)
-- creating [a new generation](https://nixos.wiki/wiki/Terms_and_Definitions_in_Nix_Project#generation) based on this closure and switching to it
-
-This is all wrapped up in the `build-switch` run command.
-
-### Development workflow
-So, in general, the workflow for managing your environment will look like
-- make some changes to the configuration (or just update flake inputs with `nix flake update`)
-- run `nix run .#build-switch`
-- watch Nix, `nix-darwin`, `home-manager`, etc do their thing
-- go about your way and benefit from a declarative environment
-  
-### Trying packages
-For quickly trying a package without installing it, I usually run
-```sh
-nix shell nixpkgs#hello
-```
-
-where `hello` is the package name from [nixpkgs](https://search.nixos.org/packages).
-
-## Compatibility and Feedback
-### Platforms
-This configuration has been tested and confirmed to work on the following platforms:
-- Newer M1/M2/M3 Apple Silicon Macs
-- Older x86_64 (Intel) Macs
-- Bare metal x86_64 PCs
-- NixOS VMs inside VMWare on macOS
-- macOS Sonoma VMs inside Parallels on macOS
-
-### Feedback and Questions
-Have feedback or questions? Feel free to use the [discussion forum](https://github.com/dlorent/nixos-config/discussions).
-
-### Contributing
-Interested in contributing to this project? Here's how you can help:
-
-- **Code Contributions**: If you're interested in contributing code, please start by looking at open issues or feature requests. Fork the repository, make your changes, and submit a pull request. Make sure your code adheres to the existing style. For significant changes, consider opening an issue for discussion before starting work.
-
-- **Reporting Bugs**: If you encounter bugs or issues, please help by reporting them. Open a GitHub Issue and include as much detail as possible: what you were doing when the bug occurred, steps to reproduce the issue, and any relevant logs or error messages.
-
-## Appendix
-### Why Nix Flakes
-**Reasons to jump into flakes and skip `nix-env`, Nix channels, etc**
-- Flakes work just like other package managers you already know: `npm`, `cargo`, `poetry`, `composer`, etc. Channels work more like traditional Linux distributions (like Ubuntu), which most devs don't know.
-- Flakes encapsulate not just project dependencies, but Nix expressions, Nix apps, and other configurations in a single file. It's all there in a single file. This is nice.
-- Channels lock all packages to one big global `nixpkgs` version. Flakes lock each individual package to a version, which is more precise and makes it much easier to manage overall.
-- Flakes have a growing ecosystem (see [Flake Hub](https://flakehub.com/) or [Dev Env](https://devenv.sh/)), so you're future-proofing yourself.
-  
-### NixOS Components
-
-| Component                   | Description                                     | 
-| --------------------------- | :---------------------------------------------  |
-| **Window Manager**          | Xorg + bspwm                                    |
-| **Terminal Emulator**       | alacritty                                       |
-| **Bar**                     | polybar                                         |
-| **Application Launcher**    | rofi                                            |
-| **Notification Daemon**     | dunst                                           |
-| **Display Manager**         | lightdm                                         |
-| **File Manager**            | thunar                                          |
-| **Text Editor**             | emacs daemon mode                               |
-| **Media Player**            | cider                                           |
-| **Image Viewer**            | feh                                             |
-| **Screenshot Software**     | flameshot                                       |
-
-### License
-This project is released under the [BSD-3-Clause license](https://github.com/dlorent/nixos-config/blob/main/LICENSE).
-
-### Support
-[Buy me a coffee](https://www.buymeacoffee.com/dlorent1) or [follow me on Github](https://github.com/dlorent).
-
-### Stars
-
-> "All we have to decide is what to do with the time that is given us." - J.R.R. Tolkien
-
-[![Star History Chart](https://api.star-history.com/svg?repos=dlorent/nixos-config&type=Date)](https://star-history.com/#dlorent/nixos-config&Date)
+# Tools Overview
+
+## Containers and Virtualization
+- **[docker](https://github.com/docker/docker-ce)**  
+  Platform for developing, shipping, and running applications in containers.
+- **[docker-compose](https://github.com/docker/compose)**  
+  Tool for defining and running multi-container Docker applications.
+- **[k9s](https://github.com/derailed/k9s)**  
+  Kubernetes CLI to manage and debug Kubernetes clusters.
+- **[tailscale](https://github.com/tailscale/tailscale)**  
+  Zero-config VPN to connect your devices securely.
+
+## Development and Productivity
+- **[gum](https://github.com/charmbracelet/gum)**  
+  A tool for writing interactive and rich shell scripts.
+- **[raycast](https://github.com/raycast/script-commands)**  
+  Productivity tool to control your Mac, launch applications, and execute scripts quickly.
+- **[veracrypt](https://github.com/veracrypt/VeraCrypt)**  
+  Free open-source disk encryption software.
+
+## Communication
+- **[discord](https://discord.com)**  
+  Free voice, video, and text chat app for gamers and communities.
+- **[slack](https://slack.com)**  
+  Collaboration hub that connects work with people through messaging, tools, and files.
+- **[zoom](https://zoom.us)**  
+  Video conferencing and online meeting platform.
+- **[microsoft-teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)**  
+  Collaboration platform that combines workplace chat, meetings, file storage, and app integration.
+
+## Synchronization and File Management
+- **[syncthing](https://github.com/syncthing/syncthing)**  
+  Open-source continuous file synchronization program.
+
+## Multimedia
+- **[vlc](https://www.videolan.org/vlc/)**  
+  Free and open-source cross-platform multimedia player and framework.
+- **[spotify](https://www.spotify.com)**  
+  Digital music service that gives you access to millions of songs.
+- **[ffmpeg](https://github.com/FFmpeg/FFmpeg)**  
+  Complete, cross-platform solution to record, convert and stream audio and video.
+
+## Web Browsers
+- **[eloston-chromium](https://github.com/Eloston/ungoogled-chromium)**  
+  Ungoogled Chromium browser focusing on privacy, control, and transparency.
+
+## Window Management
+- **[rectangle](https://github.com/rxhanson/Rectangle)**  
+  Window management app for macOS for snapping windows into various positions and sizes.
+
+## Graphics and Fonts
+- **[gimp](https://github.com/GNOME/gimp)**  
+  Open-source raster graphics editor for image retouching and editing.
+- **[emacs-all-the-icons-fonts](https://github.com/domtronn/all-the-icons.el)**  
+  Icons for Emacs to improve user interface aesthetics.
+- **[dejavu_fonts](https://github.com/dejavu-fonts/dejavu-fonts)**  
+  Font family based on the Vera Fonts with additional characters.
+- **[font-awesome](https://github.com/FortAwesome/Font-Awesome)**  
+  Icon set and toolkit.
+- **[hack-font](https://github.com/source-foundry/Hack)**  
+  Typeface designed for source code with a focus on legibility.
+- **[noto-fonts](https://github.com/googlefonts/noto-fonts)**  
+  Font family designed to cover all the scripts encoded in the Unicode standard.
+- **[noto-fonts-emoji](https://github.com/googlefonts/noto-emoji)**  
+  Set of color and black-and-white emoji fonts.
+- **[meslo-lgs-nf](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Meslo/L)**  
+  Customized version of Apple’s Menlo font with added Powerline glyphs.
+- **[jetbrains-mono](https://github.com/JetBrains/JetBrainsMono)**  
+  Typeface designed for coding with better readability.
+
+## Terminals and Shells
+- **[alacritty](https://github.com/alacritty/alacritty)**  
+  A fast, GPU-accelerated terminal emulator.
+- **[zsh-powerlevel10k](https://github.com/romkatv/powerlevel10k)**  
+  Theme for Zsh that emphasizes speed, flexibility, and out-of-the-box experience.
+- **[tmux](https://github.com/tmux/tmux)**  
+  Terminal multiplexer to switch easily between several programs in one terminal.
+- **[zellij](https://github.com/zellij-org/zellij)**  
+  Terminal workspace with support for tabs, splits, and more.
+- **[atuin](https://github.com/ellie/atuin)**  
+  Enhanced shell history.
+
+## Utilities
+- **[microsoft-auto-update](https://support.microsoft.com/en-us/office/update-office-for-mac-automatic-updates-9f7a4a11-8b6a-4f38-9d24-944a8a55a16d)**  
+  Tool for updating Microsoft applications on Mac.
+- **[aspell](http://aspell.net)**  
+  Spell-checking tool designed for various applications.
+- **[aspellDicts.en](http://aspell.net)**  
+  English dictionary for Aspell.
+- **[bash-completion](https://github.com/scop/bash-completion)**  
+  Script for command-line completion in Bash.
+- **[bat](https://github.com/sharkdp/bat)**  
+  Cat clone with syntax highlighting and Git integration.
+- **[btop](https://github.com/aristocratos/btop)**  
+  Resource monitor that shows usage and stats for processor, memory, disks, network, and processes.
+- **[coreutils](https://www.gnu.org/software/coreutils/)**  
+  Essential GNU utilities like `ls`, `cat`, and `rm`.
+- **[killall](https://man7.org/linux/man-pages/man1/killall.1.html)**  
+  Command to terminate all processes with a given name.
+- **[neofetch](https://github.com/dylanaraps/neofetch)**  
+  Command-line system information tool written in Bash.
+- **[openssh](https://github.com/openssh/openssh-portable)**  
+  Suite of secure networking utilities based on the SSH protocol.
+- **[sqlite](https://sqlite.org/index.html)**  
+  C library that provides a lightweight, disk-based database.
+- **[wget](https://www.gnu.org/software/wget/)**  
+  Network utility to retrieve files from the web using HTTP, HTTPS, and FTP.
+- **[zip](https://linux.die.net/man/1/zip)**  
+  Compression and file packaging utility.
+- **[unzip](https://linux.die.net/man/1/unzip)**  
+  Utility to list, test, and extract compressed files in a ZIP archive.
+- **[unrar](https://www.rarlab.com/rar_add.htm)**  
+  Extract files from RAR archives.
+- **[lsd](https://github.com/Peltoche/lsd)**  
+  Next-gen `ls` command with a lot of pretty colors and some additional features.
+- **[htop](https://github.com/htop-dev/htop)**  
+  Interactive process viewer for Unix systems.
+- **[iftop](https://github.com/paulhenry/iftop)**  
+  Display bandwidth usage on an interface by host.
+- **[jq](https://github.com/stedolan/jq)**  
+  Command-line JSON processor.
+- **[ripgrep](https://github.com/BurntSushi/ripgrep)**  
+  Line-oriented search tool that recursively searches your current directory for a regex pattern.
+- **[tree](https://github.com/nodakai/tree-command)**  
+  Recursive directory listing command that produces a depth-indented listing of files.
+
+## Security and Encryption
+- **[age](https://github.com/FiloSottile/age)**  
+  Simple, modern, and secure file encryption tool.
+- **[age-plugin-yubikey](https://github.com/str4d/age-plugin-yubikey)**  
+  Plugin for using YubiKeys with age encryption.
+- **[gnupg](https://github.com/gpg/gnupg)**  
+  Free implementation of the OpenPGP standard for encrypting and signing data.
+- **[libfido2](https://github.com/Yubico/libfido2)**  
+  Library for FIDO 2.0 and CTAP2 based authentication.
+
+## Cloud
+- **[google-cloud-sdk](https://github.com/GoogleCloudPlatform/cloud-sdk-docker)**  
+  CLI and libraries for interacting with Google Cloud services.
