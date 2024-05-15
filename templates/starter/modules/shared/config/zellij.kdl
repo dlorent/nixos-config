@@ -23,12 +23,11 @@ layout {
   tab name="Cloud" {
     pane split_direction="horizontal" stacked=true {
 
-    pane name="Application-PROD" cwd="/Users/dennis/kube/cloud/application-cluster-prod"
+    pane name="Application-prod" cwd="/Users/dennis/kube/cloud/application-cluster-prod"
     pane name="Application-prod-test" cwd="/Users/dennis/kube/cloud/application-cluster-prod-test"
     pane name="Application-test" cwd="/Users/dennis/kube/cloud/application-cluster-test"
     pane name="Infrastructure-mgmt" cwd="/Users/dennis/kube/cloud/infrastructure-management"
     pane name="Infrastructure-mgmt-test" cwd="/Users/dennis/kube/cloud/infrastructure-mgmt-test"
-    pane name="Application-test" cwd="/Users/dennis/kube/cloud/application-cluster-test"
     }
   }
 
