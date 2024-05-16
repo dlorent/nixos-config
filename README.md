@@ -8,6 +8,9 @@ Forked from [dustinlyons](https://github.com/dustinlyons/nixos-config) - all cre
 
 Modified for my personal needs. lot's of documentation stripped away. Detailed documentation can be found at dustin's repo (https://github.com/dustinlyons/nixos-config)
 
+
+![Alt](./demo.gif)
+
 ## For macOS (May 2024)
 This configuration supports both Intel and Apple Silicon Macs.
 
