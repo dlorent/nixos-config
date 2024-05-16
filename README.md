@@ -14,6 +14,34 @@ Modified for my personal needs. lot's of documentation stripped away. Detailed d
 ## For macOS (May 2024)
 This configuration supports both Intel and Apple Silicon Macs.
 
+
+### Prepare your system (Optional)
+
+Before installing anything you'll need to prepare your system:
+
+1. Don't register an Apple ID
+1. Enable Lockdown Mode
+1. Disable all Sharing stuff: General > Sharing: Disable All
+1. Disable Notifications previews:
+
+   - Notifications > Show Previews: Never
+   - Notifications: Disable "Allow notifications when the screen is locked"
+   - Lock Screen > Require password immediately
+
+1. Change NTP Server: General > Date & Time > Source: Change to "pool.ntp.org"
+1. Set the smart battery saver: Boost mode on AC and Low Power mode on battery
+1. Disable Siri:
+
+   - Siri and Spotlight: Disable "Ask Siri"
+   - Siri and Spotlight > Siri Suggestions > Disable all
+
+1. Disable Analytics:
+
+   - Privacy and Security > Analytics > Improvements: Disable all
+   - Privacy and Security > Apple Advertising > Disable personalized ads
+   - Game Center: Disable all
+
+
 ### 1. Install dependencies
 ```sh
 xcode-select --install
