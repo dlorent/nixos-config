@@ -64,8 +64,13 @@ in
   # Fully declarative dock using the latest from Nix Store
   local.dock.enable = true;
   local.dock.entries = [
+    { path = "/Applications/Chromium.app/"; }
     { path = "/Applications/Slack.app/"; }
+    { path = "/Applications/Nix apps/Spotify.app/"; }
+    { path = "/Applications/Discord.app/"; }
+    { path = "/Applications/Nix apps/Spotify./"; }
     { path = "/Applications/Google Chrome.app/"; }
+    { path = "${config.users.users.${user}/Applications/Home Manager Apps/VScodium.app/"; }
     { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
     {
       path = toString myEmacsLauncher;
