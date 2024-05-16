@@ -72,18 +72,9 @@ in
     { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
     { path = "${config.users.users.${user}.home}/Applications/${"Home Manager Apps"}/VScodium.app/"; }
     {
-      path = toString myEmacsLauncher;
-      section = "others";
-    }
-    {
-      path = "${config.users.users.${user}.home}/.local/share/";
-      section = "others";
-      options = "--sort name --view grid --display folder";
-    }
-    {
       path = "${config.users.users.${user}.home}/.local/share/downloads";
       section = "others";
-      options = "--sort name --view grid --display stack";
+      options = "--sort name --view grid --display folder";
     }
   ];
 
