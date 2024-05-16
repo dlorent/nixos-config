@@ -19,7 +19,4 @@ _:
 
   # Productivity Tools
   "raycast"
-
-  # Browsers
-  "google-chrome"
 ]

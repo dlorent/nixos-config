@@ -68,7 +68,6 @@ in
     { path = "/Applications/Slack.app/"; }
     { path = "/Applications/Nix apps/Spotify.app/"; }
     { path = "/Applications/Discord.app/"; }
-    { path = "/Applications/Google Chrome.app/"; }
     { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
     { path = "${config.users.users.${user}.home}/Applications/${"Home Manager Apps"}/VScodium.app/"; }
     {
