@@ -68,10 +68,9 @@ in
     { path = "/Applications/Slack.app/"; }
     { path = "/Applications/Nix apps/Spotify.app/"; }
     { path = "/Applications/Discord.app/"; }
-    { path = "/Applications/Nix apps/Spotify./"; }
     { path = "/Applications/Google Chrome.app/"; }
-    { path = "${config.users.users.${user}/Applications/Home Manager Apps/VScodium.app/"; }
     { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
+    { path = "${config.users.users.${user}}/Applications/"Home Manager Apps"/VScodium.app/"; }
     {
       path = toString myEmacsLauncher;
       section = "others";
