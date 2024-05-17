@@ -5,11 +5,7 @@ let
   # Define the content of your file as a derivation
   myEmacsLauncher = pkgs.writeScript "emacs-launcher.command" ''
     #!/bin/sh
-<<<<<<< HEAD
       emacsclient -c -n &
-=======
-    emacsclient -c -n &
->>>>>>> b3202fa (Initial commit with changes)
   '';
   sharedFiles = import ../shared/files.nix { inherit config pkgs; };
   additionalFiles = import ./files.nix { inherit user config pkgs; };
@@ -28,11 +24,8 @@ in
   };
 
   homebrew = {
-<<<<<<< HEAD
     # This is a module from nix-darwin
     # Homebrew is *installed* via the flake input nix-homebrew
-=======
->>>>>>> b3202fa (Initial commit with changes)
     enable = true;
     casks = pkgs.callPackage ./casks.nix {};
     brews = pkgs.callPackage ./brews.nix {};
@@ -60,15 +53,10 @@ in
           additionalFiles
           { "emacs-launcher.command".source = myEmacsLauncher; }
         ];
-<<<<<<< HEAD
 
         stateVersion = "23.11";
       };
 
-=======
-        stateVersion = "23.11";
-      };
->>>>>>> b3202fa (Initial commit with changes)
       programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };
 
       # Marked broken Oct 20, 2022 check later to remove this
@@ -78,7 +66,6 @@ in
   };
 
   # Fully declarative dock using the latest from Nix Store
-<<<<<<< HEAD
   local = {
     dock.enable = true;
     dock.entries = [
@@ -113,21 +100,4 @@ in
       }
     ];
   };
-=======
-  local.dock.enable = true;
-  local.dock.entries = [
-    { path = "/Applications/Chromium.app/"; }
-    { path = "/Applications/Slack.app/"; }
-    { path = "/Applications/Nix apps/Spotify.app/"; }
-    { path = "/Applications/Discord.app/"; }
-    { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-    { path = "${config.users.users.${user}.home}/Applications/${"Home Manager Apps"}/VScodium.app/"; }
-    {
-      path = "${config.users.users.${user}.home}/.local/share/downloads";
-      section = "others";
-      options = "--sort name --view grid --display folder";
-    }
-  ];
-
->>>>>>> b3202fa (Initial commit with changes)
 }

@@ -8,11 +8,8 @@ in
   nixpkgs = {
     config = {
       allowUnfree = true;
-<<<<<<< HEAD
       #cudaSupport = true;
       #cudaCapabilities = ["8.0"];
-=======
->>>>>>> b3202fa (Initial commit with changes)
       allowBroken = true;
       allowInsecure = false;
       allowUnsupportedSystem = true;

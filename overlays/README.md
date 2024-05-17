@@ -4,7 +4,6 @@ Files in this directory run automatically as part of each build. Some common way
 * Applying patches
 * Downloading different versions of files (locking to a version or trying a fork)
 * Workarounds and stuff I need to run temporarily
-<<<<<<< HEAD
 
 Here are some previous examples.
 
@@ -50,5 +49,3 @@ final: prev: {
   });
 }
 ```
-=======
->>>>>>> b3202fa (Initial commit with changes)

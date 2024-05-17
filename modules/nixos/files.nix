@@ -7,7 +7,6 @@ let
   xdg_stateHome  = "${home}/.local/state"; in
 {
 
-<<<<<<< HEAD
   "${xdg_dataHome}/bin/movesinks" = {
     executable = true;
     text = ''
@@ -51,8 +50,6 @@ let
     '';
   };
 
-=======
->>>>>>> b3202fa (Initial commit with changes)
   "${xdg_configHome}/bspwm/bspwmrc" = {
     executable = true;
     text = ''
@@ -85,20 +82,14 @@ let
       bspc config pointer_action2 resize_corner
 
       # Set background and top bar
-<<<<<<< HEAD
       feh --bg-scale $HOME/.local/share/img/wallpaper/active
-=======
->>>>>>> b3202fa (Initial commit with changes)
       systemctl --user start polybar
 
       sleep .25
 
-<<<<<<< HEAD
       # Launch these when script runs
       # -o option means "one shot", meaning the rule goes away after launching the app
 
-=======
->>>>>>> b3202fa (Initial commit with changes)
       # Wait for the network to be up
       notify-send 'Waiting for network...'
       while ! systemctl is-active --quiet network-online.target; do sleep 1; done
@@ -108,7 +99,6 @@ let
       notify-send 'Starting Emacs...'
       /run/current-system/sw/bin/emacsclient -a "" -e '(progn)' &
 
-<<<<<<< HEAD
       # Desktop 1
       # Email, Calendar, News, IDE
       bspc rule -a Google-chrome -o desktop='^1'
@@ -118,14 +108,11 @@ let
       bspc rule -a PHPStorm -o desktop='^1'
       /run/current-system/sw/bin/phpstorm &!
 
-=======
->>>>>>> b3202fa (Initial commit with changes)
       # Wait for Emacs daemon to be ready
       while ! /run/current-system/sw/bin/emacsclient -e '(progn)' &>/dev/null; do
       sleep 1
       done
       notify-send 'Emacs daemon started.'
-<<<<<<< HEAD
 
       # Desktop 2
       # Terminal, Emacs (magit)
@@ -151,8 +138,6 @@ let
       /etc/profiles/per-user/dlorent/bin/cider &!
 
       sleep 1
-=======
->>>>>>> b3202fa (Initial commit with changes)
     '';
   };
 
@@ -160,11 +145,7 @@ let
     text = ''
     # Close window
     alt + F4
-<<<<<<< HEAD
         bspc node --close
-=======
-          bspc node --close
->>>>>>> b3202fa (Initial commit with changes)
 
     # Make split ratios equal
     super + equal
@@ -213,19 +194,11 @@ let
 
     # Focus left/right desktop
     ctrl + alt + {Left,Right}
-<<<<<<< HEAD
          bspc desktop --focus {prev,next}
 
     # Focus left/right desktop
     ctrl + alt + {Up, Down}
          bspc desktop --focus {prev,next}
-=======
-          bspc desktop --focus {prev,next}
-
-    # Focus left/right desktop
-    ctrl + alt + {Up, Down}
-          bspc desktop --focus {prev,next}
->>>>>>> b3202fa (Initial commit with changes)
 
     # Focus the older or newer node in the focus history
     super + {o,i}
@@ -308,20 +281,12 @@ let
          pcmanfm
 
     # Take a screenshot with PrintSc
-<<<<<<< HEAD
     super + p
-=======
-    Print
->>>>>>> b3202fa (Initial commit with changes)
          flameshot gui -c -p $HOME/.local/share/img/screenshots
 
     # Lock the screen
     ctrl + alt + BackSpace
-<<<<<<< HEAD
         i3lock-fancy-rapid 10 15
-=======
-         i3lock
->>>>>>> b3202fa (Initial commit with changes)
 
     # Audio controls for + volume
     XF86AudioRaiseVolume
@@ -393,11 +358,7 @@ let
     text = ''
       #!/bin/sh
 
-<<<<<<< HEAD
       rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/rofi/launcher.rasi
-=======
-      rofi -no-config -no-lazy-grab -show drun -modi drun -theme ${xdg_configHome}/rofi/launcher.rasi
->>>>>>> b3202fa (Initial commit with changes)
     '';
   };
 
@@ -407,11 +368,7 @@ let
     text = ''
       #!/bin/sh
 
-<<<<<<< HEAD
       configDir="~${xdg_configHome}/rofi"
-=======
-      configDir="~/.local/share/src/nixos-config/nixos/config/rofi"
->>>>>>> b3202fa (Initial commit with changes)
       uptime=$(uptime -p | sed -e 's/up //g')
       rofi_command="rofi -no-config -theme $configDir/powermenu.rasi"
 
