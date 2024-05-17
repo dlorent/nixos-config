@@ -31,6 +31,7 @@ let
       fi
     '';
   };
+<<<<<<< HEAD
 
   # Script to import Drafts into Emacs org-roam
   "${xdg_dataHome}/bin/import-drafts" = {
@@ -51,4 +52,6 @@ let
       done
     '';
   };
+=======
+>>>>>>> b3202fa (Initial commit with changes)
 }

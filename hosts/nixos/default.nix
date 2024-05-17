@@ -1,14 +1,24 @@
+<<<<<<< HEAD
 { config, inputs, lib, pkgs, agenix, ... }:
+=======
+{ config, inputs, pkgs, ... }:
+>>>>>>> b3202fa (Initial commit with changes)
 
 let user = "dlorent";
     keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ]; in
 {
   imports = [
+<<<<<<< HEAD
     ../../modules/nixos/secrets.nix
     ../../modules/nixos/disk-config.nix
     ../../modules/shared
     ../../modules/shared/cachix
     agenix.nixosModules.default
+=======
+    ../../modules/nixos/disk-config.nix
+    ../../modules/shared
+    ../../modules/shared/cachix
+>>>>>>> b3202fa (Initial commit with changes)
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -20,9 +30,17 @@ let user = "dlorent";
       };
       efi.canTouchEfiVariables = true;
     };
+<<<<<<< HEAD
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "v4l2loopback" ];
     kernelModules = [ "uinput" "v4l2loopback" ];
     extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+=======
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+    # Uncomment for AMD GPU
+    # initrd.kernelModules = [ "amdgpu" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelModules = [ "uinput" ];
+>>>>>>> b3202fa (Initial commit with changes)
   };
 
   # Set your time zone.
@@ -32,9 +50,15 @@ let user = "dlorent";
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking = {
+<<<<<<< HEAD
     hostName = "felix"; # Define your hostname.
     useDHCP = false;
     interfaces.eno1.useDHCP = true;
+=======
+    hostName = "%HOST%"; # Define your hostname.
+    useDHCP = false;
+    interfaces."%INTERFACE%".useDHCP = true;
+>>>>>>> b3202fa (Initial commit with changes)
   };
 
   # Turn on flag for proprietary software
@@ -58,6 +82,7 @@ let user = "dlorent";
     zsh.enable = true;
   };
 
+<<<<<<< HEAD
   services = {
     xserver = {
       enable = true;
@@ -77,6 +102,32 @@ let user = "dlorent";
         enable = true;
         greeters.slick.enable = true;
         background = ../../modules/nixos/config/login-wallpaper.png;
+=======
+  services = { 
+    xserver = {
+      enable = true;
+
+      # Uncomment these for AMD or Nvidia GPU
+      # boot.initrd.kernelModules = [ "amdgpu" ];
+      # videoDrivers = [ "amdgpu" ];
+      # videoDrivers = [ "nvidia" ];
+
+      # Uncomment for Nvidia GPU
+      # This helps fix tearing of windows for Nvidia cards
+      # screenSection = ''
+      #   Option       "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+      #   Option       "AllowIndirectGLXProtocol" "off"
+      #   Option       "TripleBuffer" "on"
+      # '';
+
+      displayManager = {
+        defaultSession = "none+bspwm";
+        lightdm = {
+          enable = true;
+          greeters.slick.enable = true;
+          background = ../../modules/nixos/config/login-wallpaper.png;
+        };
+>>>>>>> b3202fa (Initial commit with changes)
       };
 
       # Tiling window manager
@@ -84,6 +135,7 @@ let user = "dlorent";
         enable = true;
       };
 
+<<<<<<< HEAD
       # Better support for general peripherals
       libinput.enable = true;
 
@@ -100,6 +152,21 @@ let user = "dlorent";
       drivers = [ pkgs.brlaser ]; # Brother printer driver
     };
 
+=======
+      # Turn Caps Lock into Ctrl
+      layout = "us";
+      xkbOptions = "ctrl:nocaps";
+
+      # Better support for general peripherals
+      libinput.enable = true;
+
+    };
+
+    # Let's be able to SSH into this machine
+    openssh.enable = true;
+
+    # Sync state between machines
+>>>>>>> b3202fa (Initial commit with changes)
     syncthing = {
       enable = true;
       openDefaultPorts = true;
@@ -112,6 +179,7 @@ let user = "dlorent";
       overrideDevices = true;
 
       settings = {
+<<<<<<< HEAD
         devices = {
           "Macbook Pro" = {
             id = "P2FYLQW-PKDFJGZ-EUGI2T7-OW4AH4I-KI462HD-U2VL3X3-GN55PP2-VNRE5AH";
@@ -140,6 +208,17 @@ let user = "dlorent";
 
     };
 
+=======
+        devices = {};
+        options.globalAnnounceEnabled = false; # Only sync on LAN
+      };
+    };
+
+    # Enable CUPS to print documents
+    # printing.enable = true;
+    # printing.drivers = [ pkgs.brlaser ]; # Brother printer driver
+
+>>>>>>> b3202fa (Initial commit with changes)
     # Picom, my window compositor with fancy effects
     #
     # Notes on writing exclude rules:
@@ -231,24 +310,38 @@ let user = "dlorent";
       };
     };
 
+<<<<<<< HEAD
     # Let's be able to SSH into this machine
     openssh.enable = true;
 
     # My editor runs as a daemon
+=======
+    gvfs.enable = true; # Mount, trash, and other functionalities
+    tumbler.enable = true; # Thumbnail support for images
+
+    # Emacs runs as a daemon
+>>>>>>> b3202fa (Initial commit with changes)
     emacs = {
       enable = true;
       package = pkgs.emacs-unstable;
     };
+<<<<<<< HEAD
 
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
   };
 
+=======
+  };
+
+  # When emacs builds from no cache, it exceeds the 90s timeout default
+>>>>>>> b3202fa (Initial commit with changes)
   systemd.user.services.emacs = {
     serviceConfig.TimeoutStartSec = "7min";
   };
 
   # Enable sound
+<<<<<<< HEAD
   sound.enable = true;
   hardware = {
     pulseaudio.enable = true;
@@ -261,12 +354,28 @@ let user = "dlorent";
     };
 
     nvidia.modesetting.enable = true;
+=======
+  # sound.enable = true;
+
+  # Video support
+  hardware = {
+    opengl.enable = true;
+    # pulseaudio.enable = true;
+    # hardware.nvidia.modesetting.enable = true;
+
+    # Enable Xbox support
+    # hardware.xone.enable = true;
+>>>>>>> b3202fa (Initial commit with changes)
 
     # Crypto wallet support
     ledger.enable = true;
   };
 
+<<<<<<< HEAD
   # Sync state between machines
+=======
+
+>>>>>>> b3202fa (Initial commit with changes)
   # Add docker daemon
   virtualisation = {
     docker = {
@@ -317,10 +426,14 @@ let user = "dlorent";
   ];
 
   environment.systemPackages = with pkgs; [
+<<<<<<< HEAD
     agenix.packages."${pkgs.system}".default # "x86_64-linux"
     gitAndTools.gitFull
     linuxPackages.v4l2loopback
     v4l-utils
+=======
+    gitAndTools.gitFull
+>>>>>>> b3202fa (Initial commit with changes)
     inetutils
   ];
 

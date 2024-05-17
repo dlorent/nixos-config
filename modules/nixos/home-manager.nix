@@ -25,11 +25,14 @@ let
   polybar-bars = builtins.readFile ./config/polybar/bars.ini;
   polybar-colors = builtins.readFile ./config/polybar/colors.ini;
 
+<<<<<<< HEAD
   # These files are generated when secrets are decrypted at build time
   gpgKeys = [
     "/home/${user}/.ssh/pgp_github.key"
     "/home/${user}/.ssh/pgp_github.pub"
   ];
+=======
+>>>>>>> b3202fa (Initial commit with changes)
 in
 {
   home = {
@@ -37,7 +40,11 @@ in
     username = "${user}";
     homeDirectory = "/home/${user}";
     packages = pkgs.callPackage ./packages.nix {};
+<<<<<<< HEAD
     file = shared-files // import ./files.nix { inherit user pkgs; };
+=======
+    file = shared-files // import ./files.nix { inherit user; };
+>>>>>>> b3202fa (Initial commit with changes)
     stateVersion = "21.05";
   };
 
@@ -63,9 +70,13 @@ in
     };
 
     # Auto mount devices
+<<<<<<< HEAD
     udiskie = {
       enable = true;
     };
+=======
+    udiskie.enable = true;
+>>>>>>> b3202fa (Initial commit with changes)
 
     polybar = {
       enable = true;
@@ -121,6 +132,7 @@ in
     };
   };
 
+<<<<<<< HEAD
   programs = shared-programs // { gpg.enable = true; };
 
   # This installs my GPG signing keys for Github
@@ -142,5 +154,8 @@ in
 
     Install = { WantedBy = [ "default.target" ]; };
   };
+=======
+  programs = shared-programs // {};
+>>>>>>> b3202fa (Initial commit with changes)
 
 }

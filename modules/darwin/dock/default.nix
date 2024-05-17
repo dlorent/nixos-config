@@ -1,7 +1,10 @@
 { config, pkgs, lib, ... }:
+<<<<<<< HEAD
 
 # Original source: https://gist.github.com/antifuchs/10138c4d838a63c0a05e725ccd7bccdd
 
+=======
+>>>>>>> b3202fa (Initial commit with changes)
 with lib;
 let
   cfg = config.local.dock;

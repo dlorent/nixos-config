@@ -5,7 +5,10 @@ let shared-packages = import ../shared/packages.nix { inherit pkgs; }; in
 shared-packages ++ [
 
   # Security and authentication
+<<<<<<< HEAD
   _1password-gui
+=======
+>>>>>>> b3202fa (Initial commit with changes)
   yubikey-agent
   keepassxc
 
@@ -16,6 +19,7 @@ shared-packages ++ [
   home-manager
 
   # Media and design tools
+<<<<<<< HEAD
   gimp
   vlc
   wineWowPackages.stable
@@ -26,6 +30,13 @@ shared-packages ++ [
   brlaser # printer driver
 
   # Calculators
+=======
+  vlc
+  fontconfig
+  font-manager
+
+  # Productivity tools
+>>>>>>> b3202fa (Initial commit with changes)
   bc # old school calculator
   galculator
 
@@ -33,6 +44,7 @@ shared-packages ++ [
   cava # Terminal audio visualizer
   pavucontrol # Pulse audio controls
 
+<<<<<<< HEAD
   # Messaging and chat applications
   cider # Apple Music on Linux
   discord
@@ -50,14 +62,26 @@ shared-packages ++ [
   qmk
   postgresql
   libusb1 # for Xbox controller
+=======
+  # Testing and development tools
+  direnv
+  rofi
+  rofi-calc
+  postgresql
+>>>>>>> b3202fa (Initial commit with changes)
   libtool # for Emacs vterm
 
   # Screenshot and recording tools
   flameshot
+<<<<<<< HEAD
   simplescreenrecorder
 
   # Text and terminal utilities
   emote # Emoji picker
+=======
+
+  # Text and terminal utilities
+>>>>>>> b3202fa (Initial commit with changes)
   feh # Manage wallpapers
   screenkey
   tree
@@ -71,14 +95,22 @@ shared-packages ++ [
   inotify-tools # inotifywait, inotifywatch - For file system events
   i3lock-fancy-rapid
   libnotify
+<<<<<<< HEAD
   ledger-live-desktop
   playerctl # Control media players from command line
   pcmanfm # Our file browser
+=======
+  pcmanfm # File browser
+>>>>>>> b3202fa (Initial commit with changes)
   sqlite
   xdg-utils
 
   # Other utilities
+<<<<<<< HEAD
   yad # I use yad-calendar with polybar
+=======
+  yad # yad-calendar is used with polybar
+>>>>>>> b3202fa (Initial commit with changes)
   xdotool
   google-chrome
 
@@ -87,7 +119,10 @@ shared-packages ++ [
 
   # Music and entertainment
   spotify
+<<<<<<< HEAD
 
   # VR
   immersed-vr
+=======
+>>>>>>> b3202fa (Initial commit with changes)
 ]

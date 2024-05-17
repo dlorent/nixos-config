@@ -1,5 +1,6 @@
 { pkgs, config, ... }:
 
+<<<<<<< HEAD
 let
   githubPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p dlorent@dlorents-MBP.localdomain";
   githubPublicSigningKey = ''
@@ -75,3 +76,14 @@ in
     '';
   };
 }
+=======
+{
+  # Initializes Emacs with org-mode so we can tangle the main config
+  ".emacs.d/init.el" = {
+    text = builtins.readFile ../shared/config/emacs/init.el;
+  };
+  ".config/zellij/zellij.kdl" = {
+    text = builtins.readFile ../shared/config/zellij.kdl;
+  };
+}
+>>>>>>> b3202fa (Initial commit with changes)

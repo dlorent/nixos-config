@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 { agenix, config, pkgs, ... }:
 
 let user = "dlorent"; in
@@ -9,11 +10,29 @@ let user = "dlorent"; in
     ../../modules/shared
     ../../modules/shared/cachix
      agenix.darwinModules.default
+=======
+{ config, pkgs, ... }:
+
+let user = "dlorent"; in
+
+{
+
+  imports = [
+    ../../modules/darwin/home-manager.nix
+    ../../modules/shared
+    ../../modules/shared/cachix
+>>>>>>> b3202fa (Initial commit with changes)
   ];
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
+<<<<<<< HEAD
+=======
+  # Unlocking sudo via fingerprint 
+  security.pam.enableSudoTouchIdAuth = true;
+
+>>>>>>> b3202fa (Initial commit with changes)
   # Setup user, packages, programs
   nix = {
     package = pkgs.nix;
@@ -38,7 +57,10 @@ let user = "dlorent"; in
   # Load configuration that is shared across systems
   environment.systemPackages = with pkgs; [
     emacs-unstable
+<<<<<<< HEAD
     agenix.packages."${pkgs.system}".default
+=======
+>>>>>>> b3202fa (Initial commit with changes)
   ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
   # Enable fonts dir
@@ -50,7 +72,11 @@ let user = "dlorent"; in
     ProgramArguments = [
       "/bin/sh"
       "-c"
+<<<<<<< HEAD
       "{ osascript -e 'display notification \"Attempting to start Emacs...\" with title \"Emacs Launch\"'; /bin/wait4path ${pkgs.emacs}/bin/emacs && { ${pkgs.emacs}/bin/emacs --fg-daemon; if [ $? -eq 0 ]; then osascript -e 'display notification \"Emacs has started.\" with title \"Emacs Launch\"'; else osascript -e 'display notification \"Failed to start Emacs.\" with title \"Emacs Launch\"' >&2; fi; } } &> /tmp/emacs_launch.log"
+=======
+      "/bin/wait4path ${pkgs.emacs}/bin/emacs && exec ${pkgs.emacs}/bin/emacs --fg-daemon"
+>>>>>>> b3202fa (Initial commit with changes)
     ];
     StandardErrorPath = "/tmp/emacs.err.log";
     StandardOutPath = "/tmp/emacs.out.log";
@@ -60,10 +86,13 @@ let user = "dlorent"; in
     stateVersion = 4;
 
     defaults = {
+<<<<<<< HEAD
       LaunchServices = {
         LSQuarantine = false;
       };
 
+=======
+>>>>>>> b3202fa (Initial commit with changes)
       NSGlobalDomain = {
         AppleShowAllExtensions = true;
         ApplePressAndHoldEnabled = false;
@@ -83,7 +112,10 @@ let user = "dlorent"; in
         autohide = false;
         show-recents = false;
         launchanim = true;
+<<<<<<< HEAD
         mouse-over-hilite-stack = true;
+=======
+>>>>>>> b3202fa (Initial commit with changes)
         orientation = "bottom";
         tilesize = 48;
       };

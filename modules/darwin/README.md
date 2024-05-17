@@ -8,5 +8,8 @@
 ├── files.nix          # Non-Nix, static configuration files (now immutable!)
 ├── home-manager.nix   # Defines user programs
 ├── packages.nix       # List of packages to install for MacOS
+<<<<<<< HEAD
 ├── secrets.nix        # Age-encrypted secrets with agenix
+=======
+>>>>>>> b3202fa (Initial commit with changes)
 ```

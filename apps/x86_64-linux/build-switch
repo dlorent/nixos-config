@@ -1,7 +1,14 @@
 #!/bin/sh -e
 
+<<<<<<< HEAD
 RED='\033[1;31m'
 GREEN='\033[1;32m'
+=======
+VERSION=1.0
+
+GREEN='\033[1;32m'
+RED='\033[1;31m'
+>>>>>>> b3202fa (Initial commit with changes)
 YELLOW='\033[1;33m'
 NC='\033[0m'
 

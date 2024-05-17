@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+<<<<<<< HEAD
+=======
+VERSION=1.0
+
+# Color codes
+>>>>>>> b3202fa (Initial commit with changes)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'

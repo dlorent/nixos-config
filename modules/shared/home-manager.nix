@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }:
 
+<<<<<<< HEAD
 let name = "dlorent ";
     user = "dlorent";
     email = "dlorent@lorentsen.nu"; in
@@ -27,11 +28,71 @@ let name = "dlorent ";
           file = "p10k.zsh";
       }
     ];
+=======
+let name = "Dennis";
+    user = "dlorent";
+    email = "dlorent@lorentsen.nu"; in
+{
+  #vscodeIum
+  vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    extensions = with pkgs.vscode-extensions; [
+      dracula-theme.theme-dracula
+      vscodevim.vim
+      yzhang.markdown-all-in-one
+      eamodio.gitlens
+      editorconfig.editorconfig
+      jnoortheen.nix-ide
+
+  ];
+};
+  #chromium - extensions not working
+  chromium = {
+    extensions = [
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+        ];
+    };
+
+  # Shared shell configuration
+  zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    autocd = false;
+    shellAliases = {
+      ls = "lsd";
+      ll = "ls -lt";
+      update = "sudo nixos-rebuild switch";
+      z = "zellij --layout ~/.config/zellij/zellij.kdl";
+    };
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        name = "powerlevel10k-config";
+        src = lib.cleanSource ./config;
+        file = "p10k.zsh";
+      }
+    ];
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "zsh-users/zsh-autosuggestions"; }
+      ];
+     };
+
+>>>>>>> b3202fa (Initial commit with changes)
     initExtraFirst = ''
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
       fi
+<<<<<<< HEAD
 
       if [[ "$(uname)" == "Linux" ]]; then
         alias pbcopy='xclip -selection clipboard'
@@ -53,28 +114,54 @@ let name = "dlorent ";
       # Ripgrep alias
       alias search='rg -p --glob "!node_modules/*" --glob "!vendor/*" "$@"'
 
+=======
+      # set brew path for formula bins
+      export PATH="/opt/homebrew/bin:$PATH"
+      # Define variables for directories
+      export PATH=$HOME/.pnpm-packages/bin:$HOME/.pnpm-packages:$PATH
+      export PATH=$HOME/.npm-packages/bin:$HOME/bin:$PATH
+      export PATH=$HOME/.local/share/bin:$PATH
+
+      # Remove history data we don't want to see
+      export HISTIGNORE="pwd:ls:cd"
+
+>>>>>>> b3202fa (Initial commit with changes)
       # Emacs is my editor
       export ALTERNATE_EDITOR=""
       export EDITOR="emacsclient -t"
       export VISUAL="emacsclient -c -a emacs"
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3202fa (Initial commit with changes)
       e() {
           emacsclient -t "$@"
       }
 
+<<<<<<< HEAD
       # Laravel Artisan
       alias art='php artisan'
 
       # PHP Deployer
       alias deploy='dep deploy'
+=======
+      # nix shortcuts
+      shell() {
+          nix-shell '<nixpkgs>' -A "$1"
+      }
+>>>>>>> b3202fa (Initial commit with changes)
 
       # Use difftastic, syntax-aware diffing
       alias diff=difft
 
       # Always color ls and group directories
       alias ls='ls --color=auto'
+<<<<<<< HEAD
 
       # Reboot into my dual boot Windows partition
       alias windows='systemctl reboot --boot-loader-entry=auto-windows'
+=======
+>>>>>>> b3202fa (Initial commit with changes)
     '';
   };
 
@@ -92,7 +179,10 @@ let name = "dlorent ";
 	    editor = "vim";
         autocrlf = "input";
       };
+<<<<<<< HEAD
       commit.gpgsign = true;
+=======
+>>>>>>> b3202fa (Initial commit with changes)
       pull.rebase = true;
       rebase.autoStash = true;
     };
@@ -100,7 +190,11 @@ let name = "dlorent ";
 
   vim = {
     enable = true;
+<<<<<<< HEAD
     plugins = with pkgs.vimPlugins; [ vim-airline vim-airline-themes copilot-vim vim-startify vim-tmux-navigator ];
+=======
+    plugins = with pkgs.vimPlugins; [ vim-airline vim-airline-themes vim-startify vim-tmux-navigator ];
+>>>>>>> b3202fa (Initial commit with changes)
     settings = { ignorecase = true; };
     extraConfig = ''
       "" General
@@ -230,7 +324,11 @@ let name = "dlorent ";
         };
         size = lib.mkMerge [
           (lib.mkIf pkgs.stdenv.hostPlatform.isLinux 10)
+<<<<<<< HEAD
           (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 14)
+=======
+          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 10)
+>>>>>>> b3202fa (Initial commit with changes)
         ];
       };
 
@@ -265,6 +363,23 @@ let name = "dlorent ";
     };
   };
 
+<<<<<<< HEAD
+=======
+  atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      sync_address = "https://lorentsen";
+      sync_frequency = "15m";
+      filter_mode_shell_up_key_binding = "directory";
+      history_filter = [
+      "^jwt.sh"
+      "^oathtool"
+   ];
+    };
+  };
+
+>>>>>>> b3202fa (Initial commit with changes)
   ssh = {
     enable = true;
     includes = [
@@ -309,7 +424,11 @@ let name = "dlorent ";
         # Use XDG data directory
         # https://github.com/tmux-plugins/tmux-resurrect/issues/348
         extraConfig = ''
+<<<<<<< HEAD
           set -g @resurrect-dir '/Users/dlorent/.cache/tmux/resurrect'
+=======
+          set -g @resurrect-dir '$HOME/.cache/tmux/resurrect'
+>>>>>>> b3202fa (Initial commit with changes)
           set -g @resurrect-capture-pane-contents 'on'
           set -g @resurrect-pane-contents-area 'visible'
         '';
