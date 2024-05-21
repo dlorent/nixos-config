@@ -20,7 +20,10 @@ _:
 
   # Browsers
   "eloston-chromium"
+  "brave-browser"
+  "intune-company-portal"
 
+  # other stuff
   "rectangle"
   "gimp"
   "tailscale"

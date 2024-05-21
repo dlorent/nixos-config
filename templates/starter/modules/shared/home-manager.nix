@@ -35,6 +35,7 @@ let name = "%NAME%";
     shellAliases = {
       ls = "lsd";
       ll = "ls -lt";
+      code ="codium";
       update = "sudo nixos-rebuild switch";
       z = "zellij --layout ~/.config/zellij/zellij.kdl";
     };
