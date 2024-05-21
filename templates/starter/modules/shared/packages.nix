@@ -55,4 +55,5 @@ with pkgs; [
   unzip
   zsh-powerlevel10k
   lsd
+  croc
 ]
