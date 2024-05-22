@@ -36,6 +36,7 @@ let name = "%NAME%";
     shellAliases = {
       ls = "lsd";
       ll = "ls -lt";
+      k = "kubectl"
       code ="codium";
       update = "sudo nixos-rebuild switch";
       z = "zellij --layout ~/.config/zellij/zellij.kdl";
@@ -88,11 +89,8 @@ let name = "%NAME%";
           nix-shell '<nixpkgs>' -A "$1"
       }
 
-      # Use difftastic, syntax-aware diffing
-      alias diff=difft
-
-      # Always color ls and group directories
-      alias ls='ls --color=auto'
+      # set kubeconfig to current dir
+      export KUBECONFIG=".kube/config"
     '';
   };
 
@@ -247,7 +245,7 @@ let name = "%NAME%";
         };
         size = lib.mkMerge [
           (lib.mkIf pkgs.stdenv.hostPlatform.isLinux 10)
-          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 10)
+          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 12)
         ];
       };
 

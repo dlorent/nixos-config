@@ -29,5 +29,6 @@ _:
   "tailscale"
   "microsoft-auto-update"
   "microsoft-teams"
+  "microsoft-outlook"
   "veracrypt"
 ]
