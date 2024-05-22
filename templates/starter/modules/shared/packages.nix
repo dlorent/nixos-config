@@ -23,6 +23,7 @@ with pkgs; [
   age-plugin-yubikey
   gnupg
   libfido2
+  sslscan
 
   # Cloud-related tools and SDKs
   docker

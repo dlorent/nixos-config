@@ -75,10 +75,10 @@ let name = "%NAME%";
       # Remove history data we don't want to see
       export HISTIGNORE="pwd:ls:cd"
 
-      # Emacs is my editor
+      # VIM is my editor
       export ALTERNATE_EDITOR=""
-      export EDITOR="emacsclient -t"
-      export VISUAL="emacsclient -c -a emacs"
+      export EDITOR="vim"
+      export VISUAL="vim"
 
       e() {
           emacsclient -t "$@"

@@ -53,10 +53,10 @@ let name = "dlorent ";
       # Ripgrep alias
       alias search='rg -p --glob "!node_modules/*" --glob "!vendor/*" "$@"'
 
-      # Emacs is my editor
+      # VIM is my editor
       export ALTERNATE_EDITOR=""
-      export EDITOR="emacsclient -t"
-      export VISUAL="emacsclient -c -a emacs"
+      export EDITOR="vim"
+      export VISUAL="vim"
       e() {
           emacsclient -t "$@"
       }
