@@ -61,20 +61,9 @@ let name = "dlorent ";
           emacsclient -t "$@"
       }
 
-      # Laravel Artisan
-      alias art='php artisan'
+      # Set kubeconfig to current dir
+      export KUBECONFIG=".kube/config/"
 
-      # PHP Deployer
-      alias deploy='dep deploy'
-
-      # Use difftastic, syntax-aware diffing
-      alias diff=difft
-
-      # Always color ls and group directories
-      alias ls='ls --color=auto'
-
-      # Reboot into my dual boot Windows partition
-      alias windows='systemctl reboot --boot-loader-entry=auto-windows'
     '';
   };
 

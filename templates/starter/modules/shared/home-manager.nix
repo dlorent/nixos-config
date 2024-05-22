@@ -29,6 +29,7 @@ let name = "%NAME%";
   zsh = {
     enable = true;
     enableCompletion = true;
+    completionInit = "autoload -U compinit && zstyle ':completion:*' menu select && compinit -i";
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     autocd = false;
