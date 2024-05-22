@@ -248,7 +248,13 @@ let name = "%NAME%";
           (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 12)
         ];
       };
-
+      keyboard.bindings = [
+        # ⌘ + enter puts window in macOS full screen
+        { key = "Enter"; mods = "Command"; action = "ToggleFullscreen"; }
+        # opt + right and left jump between words
+        { key = "Right"; mods = "Alt"; chars = "\\u001BF"; }
+        { key = "Left"; mods = "Alt"; chars = "\\u001BB"; }
+      ];
       colors = {
         primary = {
           background = "0x1f2528";
