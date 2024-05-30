@@ -29,7 +29,7 @@ let name = "%NAME%";
   zsh = {
     enable = true;
     enableCompletion = true;
-    completionInit = "autoload -U compinit && zstyle ':completion:*' menu select && compinit -i";
+    completionInit = "autoload -U compinit && zstyle ':completion:*' menu select && compinit -i && source <(kubectl completion zsh)";
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     autocd = false;
@@ -57,6 +57,8 @@ let name = "%NAME%";
       enable = true;
       plugins = [
         { name = "zsh-users/zsh-autosuggestions"; }
+        { name = "zsh-users/zsh-completions"; }
+        { name = "plugins/kubectl"; tags = [from:oh-my-zsh]; }
       ];
      };
 
