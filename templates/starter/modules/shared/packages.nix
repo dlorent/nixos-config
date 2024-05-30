@@ -28,7 +28,7 @@ with pkgs; [
   # Cloud-related tools and SDKs
   docker
   docker-compose
-  k9si
+  k9s
   (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
   kubernetes-helm
   
