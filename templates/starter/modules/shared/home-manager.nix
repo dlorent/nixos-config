@@ -58,7 +58,7 @@ let name = "%NAME%";
       plugins = [
         { name = "zsh-users/zsh-autosuggestions"; }
         { name = "zsh-users/zsh-completions"; }
-        { name = "plugins/kubectl"; tags = [from:oh-my-zsh]; }
+        { name = "plugins/kubectl"; tags = ["from:oh-my-zsh"]; }
       ];
      };
 
