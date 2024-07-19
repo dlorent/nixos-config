@@ -24,7 +24,8 @@ with pkgs; [
   gnupg
   libfido2
   sslscan
-
+  trivy
+  
   # Cloud-related tools and SDKs
   docker
   docker-compose
@@ -58,4 +59,8 @@ with pkgs; [
   zsh-powerlevel10k
   lsd
   croc
+  fzf
+  zsh-fzf-tab
+  azure-cli-extensions.fzf
+
 ]

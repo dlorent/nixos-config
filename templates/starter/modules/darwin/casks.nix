@@ -19,7 +19,6 @@ _:
   "raycast"
 
   # Browsers
-  "eloston-chromium"
   "brave-browser"
   "intune-company-portal"
 
@@ -31,4 +30,5 @@ _:
   "microsoft-teams"
   "microsoft-outlook"
   "veracrypt"
+  "argocd"
 ]
