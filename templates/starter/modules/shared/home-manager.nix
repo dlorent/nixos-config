@@ -242,7 +242,7 @@ let name = "%NAME%";
 
       font = {
         normal = {
-          family = "MesloLGS NF";
+          family = "MesloLGS Nerd Font Mono";
           style = "Regular";
         };
         size = lib.mkMerge [
